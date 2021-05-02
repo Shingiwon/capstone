@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/create.css">
+</head>
+<body>
+    <div class ="container">
+        <div class = "Topbar">
+            <h1>교대로</h1>
+        </div>
+        <div class="loginPage">
+            <h1>회원가입</h1>
+            <form action="/login_access" method="post">
+                <div class="login">
+                    <input type="text" name="ID" placeholder="아이디입력">
+                    <input type="text" name="PW" placeholder="비밀번호입력">
+                    <input type="text" name="PW" placeholder="비밀번호확인">
+                    <select name="member_type" >
+                        <option value="none">=== 선택 ===</option>
+                        <option value="korean">일반회원</option>
+                        <option value="english">사업자</option>
+
+                      </select>
+
+                </div>
+                <div class = "IDcreate">
+                    <input type="submit" value="제출"></input>
+                    <button type="button" onclick="location.href='' ">ID중복확인</button>             
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

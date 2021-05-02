@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class ="container">
+        <div class = "Topbar">
+            <h1>교대로</h1>
+        </div>
+        <div class="loginPage">
+            <form action="/login_access" method="post">
+                <div class="login">
+                    <input type="text" name="ID" placeholder="아이디입력">
+                    <input type="text" name="PW" placeholder="비밀번호입력">
+                </div>
+                <div class = "IDcreate">
+                    <input type="submit" value="로그인"></input>
+                    <button type="button" onclick="location.href='./create.html' ">회원가입</button>           
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
