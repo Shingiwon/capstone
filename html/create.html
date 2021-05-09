@@ -2,8 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/create.css">
+    <title>회원가입</title>
 </head>
 <body>
     <div class ="container">
@@ -11,26 +10,25 @@
             <h1>교대로</h1>
         </div>
         <div class="loginPage">
-            <h1>회원가입</h1>
-            <form action="/login_access" method="post">
-                <div class="login">
-                    <input type="text" name="ID" placeholder="아이디입력">
-                    <input type="text" name="PW" placeholder="비밀번호입력">
-                    <input type="text" name="PW" placeholder="비밀번호확인">
-                    <select name="member_type" >
-                        <option value="none">=== 선택 ===</option>
-                        <option value="korean">일반회원</option>
-                        <option value="english">사업자</option>
-
-                      </select>
-
+            <h2>회원가입</h2>
+            <form action="/create_user" method="post">
+                <div class="input">
+                    <input type="text" name="ID" placeholder="아이디입력" required>
+                    <input type="text" name="PW" placeholder="비밀번호입력" required>
+                    <br>
+                    <input type="text" name="email" placeholder="이메일 입력">
+                    <input type="text" name="phone" placeholder="전화번호 입력">
+                    <div class="radio">
+                        <input type="radio" name="group" value="user" checked> 사용자
+                        <input type="radio" name="group" value="business"> 사업자
+                    </div>
                 </div>
-                <div class = "IDcreate">
-                    <input type="submit" value="제출"></input>
-                    <button type="button" onclick="location.href='' ">ID중복확인</button>             
+                <div class = "button">
+                    <input type="submit" value="제출"></input>           
                 </div>
             </form>
         </div>
     </div>
+
 </body>
 </html>

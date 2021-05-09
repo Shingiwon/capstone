@@ -1,45 +1,108 @@
 var http = require('http');
 var fs = require('fs');
-var url = require('url'); // url 모듈 사용 
+var url = require('url');
 var qs = require('querystring');
+var path = require('path');
 
+const req = require('request');
+const express = require('express');
+const { PassThrough } = require('node:stream');
+const exp = express();
 
-var app = http.createServer(function(request,response){
+exp.use(express.json());
+
+var app = http.createServer(function(request, response) {
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var pathname = url.parse(_url, true).pathname;
-    console.log(_url);
-    console.log(__dirname);
-    if(pathname ==='/'){
-      response.writeHead(200,{'Content-Type':'text/html'}); // header 설정
-      fs.readFile(__dirname + '/html/login.html', (err, data) => { // 파일 읽는 메소드
-        if (err) {
-          return console.error(err); // 에러 발생시 에러 기록하고 종료
+    // var pathname = require('url').parse(request.url, true).pathname;
+    if(pathname === "/") {
+        if(queryData.id === undefined){
+            // loginHTML = '/html/login.html';
+            // loginHTML = '/html/create.html';
+            loginHTML = '/html/home.html';
+            response.writeHead(200);
+            response.end(fs.readFileSync(__dirname + loginHTML));
         }
-        response.end(data, 'utf-8'); // 브라우저로 전송
-      });
-    }else if(pathname === '/login_access') {
-      var body = '';
-      request.on('data', function(data){
-        body = body + data;
-      })
-      request.on('end', function(){
-        var post = qs.parse(body);
-        console.log(post)
-        response.writeHead(200, {'Content-Type' : 'text/html'});
-        response.end('success');
-      })
     }
-     else if(pathname === '/create.html'){
-      response.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
-        fs.readFile('./html/create.html', function(error, data){
-            console.log('../');
-              
-            response.end(data);
-        });     
-    }else { // 매칭되는 주소가 없으면
-      response.statusCode = 404; // 404 상태 코드
-      response.end('주소가 없습니다');
+    else if(pathname === "/login_access") {
+        var body = '';
+        request.on('data', function(data) {
+            body = body + data;
+        });
+        request.on('end', function() {
+            var post = qs.parse(body);
+            console.log("ID : " + post.ID + " PW : " + post.PW);
+            
+            const options = {
+                uri : "http://{보낼 URL}",
+                method : "POST",
+                qs : {
+                    id : post.ID,
+                    pw : post.PW
+                },
+                json : true
+            };
+            
+            req.post(options, function(err, response, body) {
+                console.log(body);
+                if (body == "true") {
+                    // 로그인 성공
+                }
+                else {
+                    // 로그인 실패
+                }
+            });
+            response.writeHead(200);
+            response.end('success');
+        });
+    }
+    else if (pathname === '/create_user') {
+        var body = '';
+        request.on('data', function(data) {
+            body = body + data;
+        });
+        request.on('end', function() {
+            var post = qs.parse(body);
+            console.log("ID : " + post.ID + " PW : " + post.PW + " email : " + post.email + " phone : " + post.phone + "group : " + post.group);
+            
+            const options = {
+                uri : "http://{보낼 URL}",
+                method : "POST",
+                qs : {
+                    id : post.ID,
+                    pw : post.PW,
+                    email : post.email,
+                    phone : post.phone,
+                    group : post.group
+                },
+                json : true
+            };
+            req.post(options, function(err, response, body) {
+                console.log(body);
+                if (body == "true") {
+                    // 회원가입 성공
+                }
+                else {
+                    // 회원가입 실패
+                }
+            });
+        });
+        response.writeHead(200);
+        response.end('success');
+    }
+    else if (pathname === '/create') {
+        response.writeHead(200);
+        response.end(fs.readFileSync(__dirname + '/html/create.html'));
+    }
+    else if (pathname === '/login') {
+        response.writeHead(200);
+        response.end(fs.readFileSync(__dirname + '/html/login.html'));
+    }
+    else {
+        response.writeHead(404);
+        response.end("Not Found");
     }
 });
-app.listen(3030);
+
+app.listen(3000);
