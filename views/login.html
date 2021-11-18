@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+<body>
+    <script>
+        var s = false;
+        function state(){
+            if (document.cookie){
+                s = true;
+                document.write('Logout');
+            }
+            else {
+                s = false;
+                document.write('Login');
+            }
+        }
+        function clickEvent(){
+            if (s==false){
+                window.location.href = "/login";
+            }
+            else {
+                window.location.href = "/logout";
+            }
+        }
+        function show(){
+            if (document.cookie){
+                document.write('MyPage');
+                document.getElementById("mypage").style.display ='block';
+            }
+        }
+    </script>
+    <div class="nav">
+        <div class="logo">
+            <img src="/img/gyodaeroLogo.jpg" alt="">
+        </div>
+        <div class="nav_but">
+            <a onclick="location.href = '/'">Home</a>
+            <a onclick="clickEvent();"><script>state();</script></a>
+            <a id="mypage" style="display:none" onclick="location.href = '/user'"><script>show();</script></a>
+        </div>
+    </div>
+
+    <section class="header">
+        <div class="title">
+            <h1>Login</h1>
+        </div>
+    </section>
+    
+    <section>
+        <div class ="loginForm">
+            <div>
+                <form action="/login_access" method="post">
+                    <div class="idForm">
+                        <input type="text" class='id' name="ID" placeholder="아이디입력" required>
+                    </div>
+                    <div class='passForm'>
+                        <input type="password" class='pw' name="PW" placeholder="비밀번호입력" required>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn" value="로그인"></input>
+                    </div>
+                    <div>
+                        <button type="button" class="btn" onclick="location.href = '/create'">회원가입</button>           
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="left">
+                <h1>KNUT X<br> GYODAERO</h1>
+                <div class="sns">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-github"></i>
+                </div>
+            </div>
+            <div class="right">
+                <div class="list">
+                    <h2>DEVELOPER</h2>
+                    <ul>
+                        <li>신기원</li>
+                        <li>양승현</li>
+                        <li>이재원</li>
+                    </ul>
+                </div>
+                <div class="list">
+                    <h2>EMAIL</h2>
+                    <ul>
+                        <li>tlsrldnjs@gmail.com</li>
+                        <li>didtmdgus@gmail.com</li>
+                        <li>dlwodnjs@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

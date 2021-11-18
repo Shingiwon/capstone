@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" >
+
+    <!-- Custom styles for this template -->
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    
+    <link href="/mystore.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./assets/js/ie-emulation-modes-warning.js"></script>
+    <!-- 중요 jquery의 위치가 js보다 먼저 나와야함 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <script>
+        function showmenu() {
+            if(document.getElementById("menu").style.display =='none'){
+                document.getElementById("menu").style.display ='block';
+            }
+            else{
+                document.getElementById("menu").style.display ='none';
+            }
+        }
+        function showseat() {
+            if(document.getElementById("seat").style.display =='none'){
+                document.getElementById("seat").style.display ='block';
+            }
+            else{
+                document.getElementById("seat").style.display ='none';
+            }
+        }
+
+        function show() {
+            console.log("gell")
+            if(document.getElementById("store").style.display =='none'){
+                document.getElementById("store").style.display ='block';
+            }
+            else{
+                document.getElementById("store").style.display ='none';
+            }
+        }
+    </script>
+    <script>
+        function getPermision() {
+            if(<%=permission%>==0){
+                return document.write(`미승인`);
+            }
+            else{
+                return document.write('승인');
+            }
+        }
+    </script>
+    <script>
+        var s = false;
+        function state(){
+            if (document.cookie){
+                s = true;
+                document.write('Logout');
+            }
+            else {
+                s = false;
+                document.write('Login');
+            }
+        }
+        function clickEvent(){
+            if (s==false){
+                window.location.href = "/login";
+            }
+            else {
+                window.location.href = "/logout";
+            }
+        }
+        function show(){
+            if (document.cookie){
+                document.write('MyPage');
+                document.getElementById("mypage").style.display ='block';
+            }
+        }
+    </script>
+        <div class="nav">
+            <div class="logo">
+                <img src="/img/gyodaeroLogo.jpg" alt="">
+            </div>
+            <div class="nav_but">
+                <a onclick="location.href = '/'">Home</a>
+                <a onclick="clickEvent();"><script>state();</script></a>
+                <a id="mypage" style="display:none" onclick="location.href = '/user'"><script>show();</script></a>
+            </div>
+        </div>
+<div class="container">
+    <div class="row">
+    <div class ="loginPage">
+        <div class="col-md-8 ">
+            <h2>
+                가게관리
+            </h2>
+        </div>
+        <div class="col-md-4 ">
+            <button type="button" class="btn btn-info btn-lg " data-toggle="modal" data-target="#myModal"onclick=showmenu()>
+                메뉴 추가
+              </button>
+        
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">메뉴 추가</h4>
+                    </div>
+                    <div id="menu" style="display:none">
+                        <form action = "/menu_process", method="post">
+                            <input type="text" name="menu_name" placeholder="메뉴 이름 입력">
+                            <input type="text" name="price" placeholder="가격 입력">
+                            <input type="hidden" name="storenumber" value='<%=storeNumber%>'>
+                            <input type="submit" value="승인">
+                        </form> 
+                    </div>      
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" data-target="#myModal"onclick=showseat()>
+                좌석 추가
+            </button>
+    
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">좌석 추가</h4>
+                </div>
+                <div id="seat" style="display:none">
+                    <form action = "/seat_process", method="post">
+                        <input type="text" name="all_seat" placeholder="총 좌석 입력">
+                        <input type="text" name="remain_seat" placeholder="잔여 좌석 입력">
+                        <input type="hidden" name="storenumber" value='<%=storeNumber%>'>
+                        <input type="submit" value="승인">
+                    </form> 
+                </div>  
+                </div>
+            </div>
+            </div> -->
+  
+    </div>
+
+
+</div>
+
+    <table class = "userpageTable">
+        <tr>
+            <th><lable>가게</lable></th>
+            <td><p><%=name%></p></td>
+        </tr>
+        <tr>
+            <th><label>승인여부</label></th>
+            <td><p>Permission : <script>getPermision()</script></p></td>
+        </tr>
+        <tr>
+            <th><label>좌석관리</label></th>
+            <td>
+                <p>총 좌석 : <%=seat[0].all_seat%></p>
+                <p>잔여 좌석 : <%=seat[0].remain_seat%></p>
+                <!-- <button id="btnmenu" style="display:block" onclick=showmenu();>메뉴 추가</button>
+                <div id="menu" style="display:none">
+                    <form action = "/menu_process", method="post">
+                        <input type="text" name="menu_name" placeholder="메뉴 이름 입력">
+                        <input type="text" name="price" placeholder="가격 입력">
+                        <input type="hidden" name="storenumber" value='<%=storeNumber%>'>
+                        <input type="submit" value="승인">
+                    </form> 
+                </div> -->
+
+                <button id="btnseat" style="display:block" onclick=showseat();>좌석 갱신</button>
+                <div id="seat" style="display:none">
+                    <form action = "/seat_process", method="post">
+                        <input type="text" name="all_seat" placeholder="총 좌석 입력">
+                        <input type="text" name="remain_seat" placeholder="잔여 좌석 입력">
+                        <input type="hidden" name="storenumber" value='<%=storeNumber%>'>
+                        <input type="submit" value="승인">
+                    </form> 
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>등록된메뉴</th>
+            <td>
+                <% for (var i=0;i<data.length;i++){ %>
+                                
+                    <li class="list-group-item">
+                        <div class="fw-bold">
+                            <p style='float:left'><%=data[i].menu_name%> <%=data[i].price%>원 </p>
+                            <button id="update<%=data[i].menu_id%>" style="display:block; float:left" onclick=showupdate<%=data[i].menu_id%>();>수정</button>
+                            <div id="menuupdate<%=data[i].menu_id%>" style="display:none ">
+                                <form action='/menuUpdate_process', method="post">
+                                    <input type="text" name="menu_name" placeholder="메뉴 이름 입력">
+                                    <input type="text" name="price" placeholder="가격 입력">
+                                    <input type="hidden" name="menu_id" value='<%=data[i].menu_id%>'>
+                                    <input type="submit" value="승인">
+                                </form> 
+                            </div>
+                            <form action='/menuDelete_process' method="post">
+                                <input type="hidden" name="menu_id" value='<%=data[i].menu_id%>'>
+                                <input type="submit" value="삭제">
+                                
+                            </form>
+                        </div>
+                    </li>
+                    <script>
+                        function showupdate<%=data[i].menu_id%>() {
+                        document.getElementById("update<%=data[i].menu_id%>").style.display ='none'
+                        if(document.getElementById("menuupdate<%=data[i].menu_id%>").style.display =='none'){
+                            document.getElementById("menuupdate<%=data[i].menu_id%>").style.display ='block';
+                        }
+                        else{
+                            document.getElementById("menuupdate<%=data[i].menu_id%>").style.display ='none';
+                        }
+                    }
+                    </script>
+                <% } %>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="left">
+            <h1>KNUT X<br> GYODAERO</h1>
+            <div class="sns">
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-github"></i>
+            </div>
+        </div>
+        <div class="right">
+            <div class="list">
+                <h2>DEVELOPER</h2>
+                <ul>
+                    <li>신기원</li>
+                    <li>양승현</li>
+                    <li>이재원</li>
+                </ul>
+            </div>
+            <div class="list">
+                <h2>EMAIL</h2>
+                <ul>
+                    <li>tlsrldnjs@gmail.com</li>
+                    <li>didtmdgus@gmail.com</li>
+                    <li>dlwodnjs@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+ 
+</body>
+</html>

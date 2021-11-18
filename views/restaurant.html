@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>GYODAERO</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <link href="/fonts/glyphicons-halflings-regular.eot" rel="stylesheet">
+    <link href="/fonts/glyphicons-halflings-regular.svg" rel="stylesheet">
+    <link href="/fonts/glyphicons-halflings-regular.ttf" rel="stylesheet">
+    <link href="/fonts/glyphicons-halflings-regular.woff" rel="stylesheet">
+    <link href="/fonts/glyphicons-halflings-regular.woff2" rel="stylesheet">
+    <link rel="stylesheet" href="./test.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./assets/js/ie-emulation-modes-warning.js"></script>
+</head>
+<body>
+    <script>
+        var s = false;
+        function state(){
+            if (document.cookie){
+                s = true;
+                document.write('Logout');
+            }
+            else {
+                s = false;
+                document.write('Login');
+            }
+        }
+        function clickEvent(){
+            if (s==false){
+                window.location.href = "/login";
+            }
+            else {
+                window.location.href = "/logout";
+            }
+        }
+        function show(){
+            if (document.cookie){
+                document.write('MyPage');
+                document.getElementById("mypage").style.display ='block';
+            }
+        }
+    </script>
+    <div class="nav">
+        <div class="logo">
+            <img src="/img/gyodaeroLogo.jpg" alt="">
+        </div>
+        <div class="nav_but">
+            <a onclick="location.href = '/'">Home</a>
+            <a onclick="clickEvent();"><script>state();</script></a>
+            <a id="mypage" style="display:none" onclick="location.href = '/user'"><script>show();</script></a>
+        </div>
+    </div>
+
+    <section>
+      
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+              <li data-target="#myCarousel" data-slide-to="3"></li>
+            </ol>
+          
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="img/poto1.jpg" alt="Chania">
+              </div>
+          
+              <div class="item">
+                <img src="img/poto2.jpg" alt="Chania">
+              </div>
+          
+              <div class="item">
+                <img src="img/poto3.jpg" alt="Flower">
+              </div>
+          
+              <div class="item">
+                <img src="img/poto4.jpg" alt="Flower">
+              </div>
+            </div>
+          
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+    
+      </section>
+
+    <section class="intro">
+        <div class="card">
+            <a class="button" onclick="location.href = '/restaurant'"><img src="/img/resLogo.jpg" alt=""></a>
+            <h1><a class="button" onclick="location.href = '/restaurant'">음식점</a></h1>
+        </div>
+        <div class="card">
+            <a class="button" onclick="location.href = '/cafe'"><img src="/img/cafeLogo.jpg" alt=""></a>
+            <h1><a class="button" onclick="location.href = '/cafe'">카페</a></h1>
+        </div>
+    </section>
+    <div id = "content">
+
+    <div class="container">
+        <!-- Example row of columns -->
+        
+        <div class="row">
+          
+          <p>
+            <% for (var i=0;i<data.length;i++){ %>
+              <div class="col-md-4 ">
+                
+                  <a style="text-decoration:none; color:black; font-size: 20px;" onclick="location.href = '/restaurant/<%= data[i].store_name %>'">
+                      <img class="center-block img-rounded panel" src="img/<%= data[i].store_name %>.jpg" width="310" height="200"alt="<%= data[i].store_name %>" >
+                    <p class="text-center"><%= data[i].store_name %></p>
+                  </a>
+              </div>
+            <% } %>
+          </p> 
+        </div>
+
+</div>
+<footer>
+    <div class="container">
+        <div class="left">
+            <h1>KNUT X<br> GYODAERO</h1>
+            <div class="sns">
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-github"></i>
+            </div>
+        </div>
+        <div class="right">
+            <div class="list">
+                <h2>DEVELOPER</h2>
+                <ul>
+                    <li>신기원</li>
+                    <li>양승현</li>
+                    <li>이재원</li>
+                </ul>
+            </div>
+            <div class="list">
+                <h2>EMAIL</h2>
+                <ul>
+                    <li>tlsrldnjs@gmail.com</li>
+                    <li>didtmdgus@gmail.com</li>
+                    <li>dlwodnjs@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

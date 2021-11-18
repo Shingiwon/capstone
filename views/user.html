@@ -1,0 +1,201 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>음식점</title>
+    <link href="/user.css" rel="stylesheet" />
+</head>
+<body>
+        <header>
+        <nav>
+            <ul>
+                <li><a onclick="location.href = './'">Home</a></li>
+                <li><a onclick="location.href = '/logout'">Logout</a></li>
+            </ul>
+        </nav>
+        <div>
+            <h1>
+                마이페이지
+            </h1>
+        
+        </div>
+    </header>
+    <div class ="loginPage">
+        <div>
+            <h2>회원정보</h2>
+        </div>
+        <table class ="userpageTable">
+            <tr>
+                <th><lable>USER</lable></th>
+                <td><p><%= data[0].name%></p></td>
+            </tr>
+            <tr>
+                <th><lable>ID</lable></th>
+                <td><p><%= data[0].id %></p></td>
+            </tr>
+
+            <tr>
+                <th><lable>Phone</lable></th>
+                <td>
+                    <script>
+                        if ('<%= data[0].phone %>') {
+                            document.write('<p>PHONE : <%= data[0].phone %></p>');
+                        }
+                        else {
+                            document.write('<p>전화번호가 없습니다.</p>');
+                        }
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <th><lable>Email</lable></th>
+                <td>
+                    <script>
+                    if ('<%= data[0].email %>') {
+                        document.write('<p>EMAIL : <%= data[0].email %></p>');
+                    }
+                    else {
+                        document.write('<p>이메일이 없습니다.</p>')
+                    }
+                </script>
+                </td>
+            </tr>
+            
+        </table> 
+    </div>   
+    
+    <footer>
+    </footer>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>사용자페이지</title>
+        <link rel="stylesheet" href="./test.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    </head>
+<body>
+    <script>
+        var s = false;
+        function state(){
+            if (document.cookie){
+                s = true;
+                document.write('Logout');
+            }
+            else {
+                s = false;
+                document.write('Login');
+            }
+        }
+        function clickEvent(){
+            if (s==false){
+                window.location.href = "/login";
+            }
+            else {
+                window.location.href = "/logout";
+            }
+        }
+        function show(){
+            if (document.cookie){
+                document.write('MyPage');
+                document.getElementById("mypage").style.display ='block';
+            }
+        }
+    </script>
+    <div class="nav">
+        <div class="logo">
+            <img src="./img/gyodaeroLogo.jpg" alt="">
+        </div>
+        <div class="nav_but">
+            <a onclick="location.href = '/'">Home</a>
+            <a onclick="clickEvent();"><script>state();</script></a>
+            <a id="mypage" style="display:none" onclick="location.href = '/user'"><script>show();</script></a>
+        </div>
+    </div>       
+    <div class="Information">
+        <div class="myInfo">
+            <h2>회원정보</h2>
+            <table class="table table-bordered caption-top">
+                <caption>나의 기본정보</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">이름</th>
+                    <td colspan="3"><p><%= data[0].name%></p></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">아이디</th>
+                    <td><p><%= data[0].id %></p></td>
+                    <th>비밀번호</th>
+                    <td>tmdgus</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">전화번호</th>
+                    <td>
+                        <script>
+                            if ('<%= data[0].phone %>') {
+                                document.write('<p>PHONE : <%= data[0].phone %></p>');
+                            }
+                            else {
+                                document.write('<p>전화번호가 없습니다.</p>');
+                            }
+                        </script>
+                    </td>
+                    <th>이메일</th>
+                    <td>
+                    <script>
+                        if ('<%= data[0].email %>') {
+                            document.write('<p>EMAIL : <%= data[0].email %></p>');
+                        }
+                        else {
+                            document.write('<p>이메일이 없습니다.</p>')
+                        }
+                    </script>
+                    </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">주소</th>
+                      <td colspan="3">주소가 없습니다.</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+      <footer>
+        <div class="container">
+            <div class="left">
+                <h1>KNUT X<br> GYODAERO</h1>
+                <div class="sns">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-github"></i>
+                </div>
+            </div>
+            <div class="right">
+                <div class="list">
+                    <h2>DEVELOPER</h2>
+                    <ul>
+                        <li>신기원</li>
+                        <li>양승현</li>
+                        <li>이재원</li>
+                    </ul>
+                </div>
+                <div class="list">
+                    <h2>EMAIL</h2>
+                    <ul>
+                        <li>tlsrldnjs@gmail.com</li>
+                        <li>didtmdgus@gmail.com</li>
+                        <li>dlwodnjs@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
